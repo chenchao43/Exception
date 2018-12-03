@@ -3,7 +3,6 @@
 * 返回到一种安全状态，并且能够让用户执行一些其他命令
 * 或允许用户保存所有操作的结果，妥善终止程序
 
-
 ### 常见的错误 
 
 * 用户输入错误：输入语法错误
@@ -24,7 +23,7 @@ IOException:由IO错误等导致的异常
 RuntimeException出现了，一定是程序的问题，比如数组越界，访问空指针，错误的类型转换
 
 声明受查异常（除了error和RuntimeException），非受查异常要么不可控制，要么应该避免发生
-
+```
 throw new EOFException（）；
 //或者
 EOFException e=new EOFException();
@@ -47,11 +46,14 @@ String readData（Scanner in）throws EOFException
     }
     return s;
 }
+```
+
 
 
 创建异常类
 
 一般定义两个构造器，一个是默认的构造器，一个是带有详细描述信息的的构造器
+```
 class FileFormatException extends IOException
 {
     public FileFormatException(){};
@@ -60,6 +62,8 @@ class FileFormatException extends IOException
         super(gripe);
     }
 }
+```
+
 
 java.lang.Throwable()
 Throwable()
@@ -77,6 +81,7 @@ String getMessage（）
 继续传递：public void read（String filename）throws IOException
 
 处理
+```
 try{
 
 }
@@ -84,6 +89,8 @@ catch(IOException e){
 
     e.getMassage()
     }
+```
+
     
 finally语句 
 当代码中抛出一个异常时，就会终止方法中的剩余代码的处理，并推出这个方法的执行。如果方法获得了一些本地资源，并且只有这个方法自己知道，有如果这些资源在退出方法之前必须被收回，那么就会产资源回收问题。一种解决方案是捕获并重新抛出所有的异常。但是这种解决方案比较乏味，这是因为需要在两个地方清除所分配的资源。一个在正常的代码中，另一个是在异常的代码中。 
@@ -92,6 +99,7 @@ Java有一种更好的解决方案，这就是finally子句，
 try语句可以只有finally子句，而没有catch子句
 
 建议使用下面方式
+```
 InputStream in=...;
 try
 {
@@ -116,6 +124,9 @@ try（Scanner in =new Scanner (new FileInputStream("...")),"")
     while(in.hasNext())
         System.out.println(in.next());
 }
+```
+
+
 
 分析堆栈轨迹元素 
 堆栈轨迹（stack trace）是一个方法调用过程的列表，它包含了程序执行过程中方法调用的特定位置
@@ -186,3 +197,10 @@ logger.log(Level.FINE,message);
     sourceClass - 发出日志记录请求的类的名称
     sourceMethod - 发出日志记录请求的方法的名称
     msg - 字符串消息（或消息目录中的键）
+
+
+
+
+
+
+
