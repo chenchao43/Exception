@@ -133,11 +133,13 @@ try（Scanner in =new Scanner (new FileInputStream("...")),"")
 
 一种更灵活的方法是使用getStackTrace方法，他会得到StackTraceElement对象的一个数组，可以在你的程序中分析这个对象数组。 
 例如：
-
+```
 Throwable t=new Throwable（）；
 StackTraceElement[] frames=t.getStackTrace();
 for(StackTraceElement frame:frames)
     analyst frame;
+```
+
 
 
 使用异常机制的技巧 
@@ -153,14 +155,17 @@ for(StackTraceElement frame:frames)
 记录日志
 
 基本日志
+```
 Logger.getGlobal().info("File->opened");
 Logger.getGlobal().setLevel(Level.off);//设置日志级别
+```
+
 
 实际中不可能所有日志都记录在全局的日志中：
 可以调用getLogger方法来串讲或者获取记录器
-
+```
 public static final Logger mylogger=Logger.getLogger("helo");
-
+```
 未被任何变量引用的日志记录其可能会被垃圾回收，所以要用一个静态变量存储日志记录器的一个引用 
 
 与包名类似，日志记录器名也有层次结构。事实上，与包名相比，日志记录器的层次性更强。对于包名来说，一个包的名字与其父包的名字之间没有语义关系，但是日志记录器的父与子之间将共享某些属性。例如：如果对com.mycompany日志记录器设置了日志级别，他的子记录器也会继承这个级别 
